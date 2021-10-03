@@ -60,14 +60,14 @@ resource "aws_security_group_rule" "tfgoat-cluster-ingress-workstation-https" {
 resource "aws_eks_cluster" "tfgoat" {
   name     = "${local.prefix}-tfgoat-cluster"
   role_arn = aws_iam_role.tfgoat-cluster.arn
-
   vpc_config {
     security_group_ids = [aws_security_group.tfgoat-cluster.id]
     subnet_ids         = aws_subnet.tfgoat[*].id
+    endpoint_public_access = false
   }
-
   depends_on = [
     aws_iam_role_policy_attachment.tfgoat-cluster-AmazonEKSVPCResourceController,
     aws_iam_role_policy_attachment.tfgoat-cluster-AmazonEKSVPCResourceController,
   ]
 }
+
