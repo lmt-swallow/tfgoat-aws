@@ -39,14 +39,16 @@ resource "aws_security_group" "tfgoat-cluster" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    # [Shisho]: You can ignore this report by adding the following comment:
+    # shisho: mark-as-intended aws-vpc-ensure-coarse-sg-egress-cidr-is-intended
+    cidr_blocks = [ "0.0.0.0/0" ]
   }
 }
+
 
 resource "aws_security_group_rule" "tfgoat-cluster-ingress-workstation-https" {
   cidr_blocks       = ["0.0.0.0/0"]
