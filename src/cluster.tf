@@ -76,7 +76,10 @@ resource "aws_eks_cluster" "tfgoat" {
     }            
     resources = [ "secrets" ]
   }
+  # [Shisho]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_cluster#enabled_cluster_log_types
+  enabled_cluster_log_types = ["api", "authenticator", "audit", "scheduler", "controllerManager"]
 }
+
 
 # [Shisho]: See the following document:
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key
